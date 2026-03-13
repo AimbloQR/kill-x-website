@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KillX GFX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        :root {
+            --background: #0f0f0f;
+            --foreground: #f2f2f2;
+            --card: #1a1a1a;
+            --muted-foreground: #a0a0a0;
+            --border: #333333;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--foreground);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Glass Morphism */
+        .glass {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-strong {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Neon Effects */
+        .neon-text {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3), 0 0 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        .neon-border {
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2), inset 0 0 15px rgba(255, 255, 255, 0.05);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 50;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        nav.glass {
+            backdrop-filter: blur(10px);
+            background: rgba(15, 15, 15, 0.8);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1.5rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 2rem;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        .nav-links a {
+            color: var(--muted-foreground);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--foreground);
+        }
+
+        .nav-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            border: 1px solid var(--foreground);
+            color: var(--foreground);
+            background: transparent;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--foreground);
+            color: var(--background);
+        }
+
+        /* Section Containers */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 8rem;
+            padding-bottom: 6rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            opacity: 0.3;
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+
+        @media (min-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .hero-text {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--muted-foreground);
+            width: fit-content;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 3.75rem;
+            }
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, var(--foreground), var(--foreground), var(--muted-foreground));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--muted-foreground);
+            line-height: 1.8;
+            max-width: 42rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            padding-top: 1rem;
+        }
+
+        button {
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--foreground);
+            color: var(--background);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--foreground);
+            color: var(--foreground);
+            background: transparent;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2), inset 0 0 15px rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 384px;
+            border-radius: 1rem;
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .hero-image {
+                display: flex;
+            }
+        }
+
+        .hero-image {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: relative;
+            z-index: 1;
+            border-radius: 0.95rem;
+            border: 2px solid rgba(255, 255, 255, 0.85);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.05);
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            opacity: 0.4;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        h2 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            h2 {
+                font-size: 3.25rem;
+            }
+        }
+
+        /* Portfolio Section */
+        .portfolio-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .portfolio-header p {
+            color: var(--muted-foreground);
+            font-size: 1.125rem;
+            max-width: 42rem;
+            margin: 1rem auto 0;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .portfolio-card {
+            border-radius: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+        .portfolio-card:hover {
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .portfolio-image {
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+        }
+
+        .portfolio-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-card:hover .portfolio-image::after {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
+        }
+
+        .portfolio-info {
+            position: relative;
+            z-index: 10;
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-info h3 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .portfolio-info p {
+            font-size: 0.875rem;
+            color: var(--muted-foreground);
+        }
+
+        .portfolio-desc {
+            padding: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            color: var(--muted-foreground);
+            font-size: 0.875rem;
+        }
+
+        .portfolio-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--foreground);
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-link:hover {
+            transform: translateX(0.25rem);
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-number {
+            font-size: 2.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3);
+            transition: color 0.3s ease;
+        }
+
+        .stat-card:hover .stat-number {
+            color: var(--foreground);
+        }
+
+        .stat-label {
+            color: var(--muted-foreground);
+            font-size: 0.875rem;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .about-text h2 {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .about-text p {
+            color: var(--muted-foreground);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .skill-dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+            background: var(--foreground);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        .about-image {
+            height: 384px;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            position: relative;
+            z-index: 1;
+            filter: saturate(1.05) contrast(1.05);
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+            opacity: 0.2;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .about-placeholder {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .avatar-circle {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom right, rgba(242, 242, 242, 0.2), rgba(242, 242, 242, 0.05));
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        /* CTA Section */
+        .cta-content {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .cta-content h2 {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-content p {
+            color: var(--muted-foreground);
+            font-size: 1.125rem;
+        }
+
+        .email-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 640px) {
+            .email-form {
+                flex-direction: row;
+            }
+        }
+
+        /* email input removed; contact now via Discord button */
+
+        .btn-submit {
+            white-space: nowrap;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 3rem 1.5rem;
+        }
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .footer-section h4 {
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--muted-foreground);
+        }
+
+        .footer-section a {
+            color: var(--muted-foreground);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--foreground);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--muted-foreground);
+            font-size: 0.875rem;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.4;
+            }
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-10px) scale(1.03);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.05);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(255, 255, 255, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        /* Apply animations to elements */
+        nav {
+            animation: slideDown 0.6s ease-out;
+        }
+
+        .hero-text {
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .hero-badge {
+            animation: fadeIn 0.8s ease-out 0.2s both;
+        }
+
+        h1 {
+            animation: slideUp 0.8s ease-out 0.3s both;
+        }
+
+        .hero p {
+            animation: slideUp 0.8s ease-out 0.4s both;
+        }
+
+        .button-group {
+            animation: slideUp 0.8s ease-out 0.5s both;
+        }
+
+        .portfolio-header {
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .portfolio-card {
+            animation: slideUp 0.8s ease-out;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-card {
+            animation: slideUp 0.8s ease-out;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .about-text {
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .about-image {
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        .cta-content {
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .email-form {
+            animation: slideUp 0.8s ease-out 0.2s both;
+        }
+
+        /* Button animations */
+        button {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .btn-primary {
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 1);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links a {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: var(--foreground);
+            transition: left 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            left: 0;
+        }
+
+        /* Skill dots animation */
+        .skill-dot {
+            transition: all 0.3s ease;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .skill-item:hover .skill-dot {
+            animation: glow 1s ease-in-out infinite;
+            transform: scale(1.5);
+        }
+
+        /* email input removed; contact now via Discord button */
+
+        /* Footer links animation */
+        .footer-section a {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .footer-section a:hover {
+            transform: translateX(5px);
+        }
+
+        /* Stagger animation for grid items */
+        .portfolio-card:nth-child(1) { animation-delay: 0.1s; }
+        .portfolio-card:nth-child(2) { animation-delay: 0.2s; }
+        .portfolio-card:nth-child(3) { animation-delay: 0.3s; }
+        .portfolio-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) { animation-delay: 0.3s; }
+        .stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .skill-item:nth-child(1) { animation-delay: 0.1s; }
+        .skill-item:nth-child(2) { animation-delay: 0.2s; }
+        .skill-item:nth-child(3) { animation-delay: 0.3s; }
+        .reviews-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .reviews-header p {
+            color: var(--muted-foreground);
+            font-size: 1.125rem;
+            max-width: 42rem;
+            margin: 1rem auto 0;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .reviews-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .review-card {
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .review-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.7);
+            transform: translateY(-5px);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(242, 242, 242, 0.3), rgba(242, 242, 242, 0.1));
+            flex-shrink: 0;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        .review-meta {
+            flex: 1;
+        }
+
+        .review-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .review-role {
+            font-size: 0.8rem;
+            color: var(--muted-foreground);
+        }
+
+        .review-stars {
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .star {
+            color: #ffd700;
+            font-size: 1rem;
+        }
+
+        .review-text {
+            color: var(--muted-foreground);
+            line-height: 1.7;
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+
+        /* Stagger animation for grid items */
+        .portfolio-card:nth-child(1) { animation-delay: 0.1s; }
+        .portfolio-card:nth-child(2) { animation-delay: 0.2s; }
+        .portfolio-card:nth-child(3) { animation-delay: 0.3s; }
+        .portfolio-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) { animation-delay: 0.3s; }
+        .stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .skill-item:nth-child(1) { animation-delay: 0.1s; }
+        .skill-item:nth-child(2) { animation-delay: 0.2s; }
+        .skill-item:nth-child(3) { animation-delay: 0.3s; }
+
+        .review-card:nth-child(1) { animation-delay: 0.1s; }
+        .review-card:nth-child(2) { animation-delay: 0.2s; }
+        .review-card:nth-child(3) { animation-delay: 0.3s; }
+        .review-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .review-card {
+            animation: slideUp 0.8s ease-out;
+        }
+
+        /* Reduce motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="glass">
+        <div class="nav-container">
+            <div class="nav-logo neon-text">Killx GFX</div>
+            <div class="nav-links">
+                <a href="#work">Work</a>
+                <a href="#about">About</a>
+                <a href="#contact">Get in Touch</a>
+            </div>
+            <button class="nav-btn neon-border" onclick="window.location.href='pricing.html'">Pricing</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge">Roblox Visuals 💠Thumbnails 💠GFX</div>
+                    <h1>KillX GFX Artist</h1>
+                    <p>High end roblox gfx and high CTR thumbnails for games studios creators. Also specialist in 2d art, realism, and ctr based works</p>
+                    <div class="button-group">
+                        <button class="btn-primary" onclick="window.location.href='#work'">
+                            View My Work
+                            <span>→</span>
+                        </button>
+                        <button class="btn-secondary neon-border" onclick="window.location.href='pricing.html'">Pricing</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="assets/hero-killx.png" alt="Killx GFX showcase artwork" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="work">
+        <div class="container">
+            <div class="portfolio-header">
+                <h2 class="neon-text">Selected Works</h2>
+                <p>A curated collection of recent projects and design explorations</p>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-card glass-strong">
+                    <div class="portfolio-image" style="background-image: url('assets/project-1.png'); background-size: cover; background-position: center;">
+                        <div class="portfolio-info">
+                            <h3 class="neon-text">Project 1</h3>
+                            <p>High Quality GFX</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-card glass-strong">
+                    <div class="portfolio-image" style="background-image: url('assets/project-2.png'); background-size: cover; background-position: center;">
+                        <div class="portfolio-info">
+                            <h3 class="neon-text">Project 2</h3>
+                            <p>High Quality GFX</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-card glass-strong">
+                    <div class="portfolio-image" style="background-image: url('assets/project-3.png'); background-size: cover; background-position: center;">
+                        <div class="portfolio-info">
+                            <h3 class="neon-text">Project 3</h3>
+                            <p>Game Thumbnail</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-card glass-strong">
+                    <div class="portfolio-image" style="background-image: url('assets/project-4.png'); background-size: cover; background-position: center;">
+                        <div class="portfolio-info">
+                            <h3 class="neon-text">Project 4</h3>
+                            <p>High CTR Thumbnail</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section>
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card neon-border">
+                    <div class="stat-number neon-text">50M+</div>
+                    <div class="stat-label">Visits Contributed</div>
+                </div>
+                <div class="stat-card neon-border">
+                    <div class="stat-number neon-text">50+</div>
+                    <div class="stat-label">Clients Worked With</div>
+                </div>
+                <div class="stat-card neon-border">
+                    <div class="stat-number neon-text">3+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-card neon-border">
+                    <div class="stat-number neon-text">100%</div>
+                    <div class="stat-label">Satisfaction Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="reviews">
+        <div class="container">
+            <div class="reviews-header">
+                <h2 class="neon-text">Client Reviews</h2>
+                <p>What amazing creators and studios say about working with me</p>
+            </div>
+
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar"></div>
+                        <div class="review-meta">
+                            <div class="review-name">Alex Studios</div>
+                            <div class="review-role">Game Studio</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="review-text">"KillX delivered incredible GFX assets that took our game thumbnails to the next level. The attention to detail and fast turnaround was impressive!"</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar"></div>
+                        <div class="review-meta">
+                            <div class="review-name">Jordan Creators</div>
+                            <div class="review-role">Content Creator</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="review-text">"The thumbnail designs increased my click-through rate by 40%. Professional, creative, and exactly what I needed for my channel growth!"</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar"></div>
+                        <div class="review-meta">
+                            <div class="review-name">Luna Games</div>
+                            <div class="review-role">Game Developer</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="review-text">"Outstanding quality GFX work. KillX understood our brand vision perfectly and delivered assets that exceeded expectations. Highly recommended!"</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar"></div>
+                        <div class="review-meta">
+                            <div class="review-name">Epic Creators Co</div>
+                            <div class="review-role">Agency</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="review-text">"We've worked with KillX on multiple projects. The consistency, professionalism, and creative prowess make them our go-to GFX artist."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="neon-text">About Me</h2>
+                    <p>From the middle of 2023, I have always been interested
+                        in the Roblox development business. It was then where I
+                        decided to use my creative prowess to the test and
+                        create attracting, eye drawing GFX art.</p>
+                    <p>My approach combines strategic thinking with artistic excellence, ensuring every project not only looks beautiful but also achieves its goals</p>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-dot"></div>
+                            <span>High CTR</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-dot"></div>
+                            <span>Thumbnails</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-dot"></div>
+                            <span>GFX</span>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-dot"></div>
+                            <span>2D Art</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image glass-strong">
+                    <img src="assets/about-killx.png" alt="Killx GFX portrait artwork" />
+                </div>
+            </div>
+        </div>
+    </section>
+<section id="reviews">
+        <div class="container">
+            <div class="reviews-header">
+                <h2 class="neon-text">Client Reviews</h2>
+                <p>What amazing creators and studios say about working with me</p>
+            </div>
+
+            <div class="reviews-grid">
+                <div class="review-card">
+                    
+                    <div class="review-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="review-text">"Very talented gfx artist, easy to communicate with and good prices!"</p>
+                </div>
+
+                <div class="review-card">
+                    
+                        
+                            
+                    <div class="review-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="review-text">"Amazing creator to work with! Honestly one of the easiest people that I have worked with. Super responsive, Creative and clear vision on how to do the task given. I have worked with him now multiple times and every single time I get exactly what I asked!"</p>
+                </div>
+
+                <div class="review-card">
+                    
+                    <div class="review-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="review-text">"THIS IS AMAZING. Im so happy... I couldnt think of any better that could be done. I love it!"</p>
+                </div>
+
+                <div class="review-card">
+                    
+                    <div class="review-stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p class="review-text">"One of the best artists avaiable in the market. The quality is good and the work was timely done."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- CTA Section -->
+    <section id="contact">
+        <div class="container" style="max-width: 512px;">
+            <div class="cta-content">
+                <h2 class="neon-text">Ready to Collaborate?</h2>
+                <p>Let's create something amazing together. Get in touch to discuss your next project.</p>
+            </div>
+
+            <div class="email-form" style="display: flex; justify-content: center;">
+                <button class="btn-primary btn-submit neon-border" type="button" onclick="window.open('https://discord.gg/your-invite','_blank','noopener,noreferrer')">
+                    <span>→</span> Message me on Discord
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <div style="font-size: 1.25rem; font-weight: bold; margin-bottom: 1rem; text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3);">KillX GFX</div>
+                    <p style="font-size: 0.875rem; color: var(--muted-foreground);">Creating stunning GFX</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="#work">Work</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Social</h4>
+                    <ul>
+                        <li><a href="https://www.roblox.com/share?code=31214af3d49a2c408d7361b803810bc4&type=Profile&source=ProfileShare&stamp=1773379339344">Roblox</a></li>
+                    
+                        <li><a href="https://x.com/killxdesignz">Twitter</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+            <div class="footer-bottom">
+                <p>&copy; 2026 KillX GFX. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing · KillX GFX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    :root {
+      --background: #0f0f0f;
+      --foreground: #f2f2f2;
+      --card: #1a1a1a;
+      --muted-foreground: #a0a0a0;
+      --border: #333333;
+      --success: #41ffb6;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--background);
+      color: var(--foreground);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; }
+
+    /* Glass Morphism */
+    .glass {
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .glass-strong {
+      backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Neon Effects */
+    .neon-text {
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+                   0 0 20px rgba(255, 255, 255, 0.3),
+                   0 0 30px rgba(255, 255, 255, 0.2);
+    }
+
+    .neon-border {
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2),
+                  inset 0 0 15px rgba(255, 255, 255, 0.05);
+    }
+
+    /* Navigation (same vibe as index) */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 50;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    nav.glass {
+      backdrop-filter: blur(10px);
+      background: rgba(15, 15, 15, 0.8);
+    }
+
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .nav-logo {
+      font-size: 1.25rem;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: none;
+      gap: 2rem;
+      align-items: center;
+      font-size: 0.875rem;
+      flex: 1;
+      justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+      .nav-links { display: flex; }
+    }
+
+    .nav-links a {
+      color: var(--muted-foreground);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover { color: var(--foreground); }
+    .nav-links a.active { color: var(--foreground); }
+
+    .nav-btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      border: 1px solid var(--foreground);
+      color: var(--foreground);
+      background: transparent;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+    }
+
+    .nav-btn:hover {
+      background: var(--foreground);
+      color: var(--background);
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    header.hero {
+      padding-top: 8.25rem;
+      padding-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header.hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 35%, rgba(255, 255, 255, 0.1) 0%, transparent 52%);
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2.5rem 0 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--muted-foreground);
+      width: fit-content;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.05);
+      margin: 0 auto 1rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    @media (min-width: 768px) {
+      h1 { font-size: 3.75rem; }
+    }
+
+    .sub {
+      margin: 1rem auto 0;
+      max-width: 56rem;
+      color: var(--muted-foreground);
+      font-size: 1.05rem;
+      line-height: 1.9;
+    }
+
+    section {
+      padding: 4.5rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* Pricing */
+    .pricing-top {
+      text-align: center;
+      margin-bottom: 2.25rem;
+    }
+
+    .toggle {
+      display: inline-flex;
+      gap: 0.5rem;
+      padding: 0.4rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.05);
+      margin-bottom: 1rem;
+    }
+
+    .toggle button {
+      border: 0;
+      background: transparent;
+      color: var(--muted-foreground);
+      padding: 0.55rem 0.9rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.25s ease;
+    }
+
+    .toggle button[aria-pressed="true"] {
+      color: var(--background);
+      background: var(--foreground);
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
+    }
+
+    .pricing-mode-hidden {
+      display: none;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+
+    @media (min-width: 900px) {
+      .pricing-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .plan {
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      padding: 1.5rem;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .plan:hover { transform: translateY(-4px); }
+
+    .plan.featured {
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 0 28px rgba(255, 255, 255, 0.16),
+                  inset 0 0 24px rgba(255, 255, 255, 0.06);
+    }
+
+    .plan h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.25rem;
+    }
+
+    .plan p.desc {
+      color: var(--muted-foreground);
+      margin-bottom: 1.1rem;
+    }
+
+    .price {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin: 0.25rem 0 1.25rem;
+    }
+
+    .price .amount {
+      font-size: 2.25rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .price .per {
+      color: var(--muted-foreground);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .cta {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+
+    .btn {
+      padding: 0.75rem 1.15rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      user-select: none;
+    }
+
+    .btn.primary {
+      background: var(--foreground);
+      color: var(--background);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.22),
+                  inset 0 0 18px rgba(255, 255, 255, 0.06);
+      border-color: transparent;
+    }
+
+    .btn.primary:hover { opacity: 0.92; }
+
+    .btn.secondary {
+      background: transparent;
+      color: var(--foreground);
+    }
+
+    .btn.secondary:hover { background: rgba(255, 255, 255, 0.08); }
+
+    ul.features {
+      list-style: none;
+      display: grid;
+      gap: 0.6rem;
+      margin-top: 0.25rem;
+    }
+
+    ul.features li {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 0.6rem;
+      align-items: start;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    ul.features li span.icon {
+      color: var(--success);
+      line-height: 1.2;
+      font-weight: 900;
+    }
+
+    .note {
+      margin-top: 2rem;
+      text-align: center;
+      color: var(--muted-foreground);
+      font-size: 0.95rem;
+    }
+
+    .note a {
+      color: var(--foreground);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .note a:hover { border-bottom-color: rgba(255, 255, 255, 0.6); }
+
+    /* Reduce motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="glass">
+    <div class="nav-container">
+      <div class="nav-logo neon-text">Killx GFX</div>
+      <div class="nav-links">
+        <a href="index.html#work">Work</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Get in Touch</a>
+        <a class="active" href="pricing.html">Pricing</a>
+      </div>
+      <a class="nav-btn neon-border" href="index.html#contact">Order Now</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="badge">Fast delivery · Clean comps · Studio-ready</div>
+        <h1 class="neon-text">Pricing</h1>
+        <p class="sub">
+          Simple packages for Roblox thumbnails and GFX. Pick a tier, then message your brief and references.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <div class="pricing-top">
+        <div class="toggle glass" role="group" aria-label="Pricing type">
+          <button type="button" id="mode-3d" aria-pressed="true">3D / GFX</button>
+          <button type="button" id="mode-2d" aria-pressed="false">2D Art</button>
+        </div>
+        <p class="sub" style="max-width: 60rem;">
+          All prices are **per order**. Switch between <strong>3D / GFX</strong> and <strong>2D Art</strong> to see the options.
+        </p>
+      </div>
+
+      <div id="pricing-3d" class="pricing-mode">
+        <div class="pricing-grid">
+          <article class="plan glass-strong">
+            <h3>Icons</h3>
+            <p class="desc">Clean icons for your games.</p>
+            <div class="price">
+              <div class="amount">3.5k+ robux</div>
+              <div class="per">per order</div>
+            </div>
+            <div class="cta">
+              <a class="btn primary" href="index.html#contact">Get Icons <span>→</span></a>
+              <a class="btn secondary neon-border" href="index.html#work">See work</a>
+            </div>
+            <ul class="features">
+              <li><span class="icon">✓</span><span>or $15 USD</span></li>
+              <li><span class="icon">✓</span><span>1 revision pass</span></li>
+              <li><span class="icon">✓</span><span>HD export (YouTube/Roblox ready)</span></li>
+              <li><span class="icon">✓</span><span>Delivery: 24–72h</span></li>
+            </ul>
+          </article>
+
+          <article class="plan glass-strong featured">
+            <h3 class="neon-text">Thumbnails</h3>
+            <p class="desc">High Quality Thumbnails for your games or videos.</p>
+            <div class="price">
+              <div class="amount">6k+ robux</div>
+              <div class="per">per order</div>
+            </div>
+            <div class="cta">
+              <a class="btn primary" href="index.html#contact">Get Thumbnails <span>→</span></a>
+              <a class="btn secondary neon-border" href="index.html#work">See work</a>
+            </div>
+            <ul class="features">
+              <li><span class="icon">✓</span><span>or $25+ USD</span></li>
+              <li><span class="icon">✓</span><span>1 revision pass</span></li>
+              <li><span class="icon">✓</span><span>Can do both CTR and non-CTR</span></li>
+              <li><span class="icon">✓</span><span>Delivery: 24–48h</span></li>
+            </ul>
+          </article>
+
+          <article class="plan glass-strong">
+            <h3>Profile Pictures</h3>
+            <p class="desc">Engaing profile pictures for your youtube channal or discord..</p>
+            <div class="price">
+              <div class="amount">2.5k+ robux</div>
+              <div class="per">per order</div>
+            </div>
+            <div class="cta">
+              <a class="btn primary" href="index.html#contact">Get Profile Pictures <span>→</span></a>
+              <a class="btn secondary neon-border" href="index.html#work">See work</a>
+            </div>
+            <ul class="features">
+              <li><span class="icon">✓</span><span>or $10+ USD</span></li>
+              <li><span class="icon">✓</span><span>1 revision pass</span></li>
+              <li><span class="icon">✓</span><span>Will go through your ideas and create a profile picture based on your brief</span></li>
+              <li><span class="icon">✓</span><span>Delivery: 24–72h</span></li>
+            </ul>
+          </article>
+        </div>
+
+        <p class="note">
+          Need custom pricing (monthly retainers, bulk thumbnails, or game studio work)?
+          <a href="index.html#contact">Message me</a>.
+        </p>
+      </div>
+
+      <div id="pricing-2d" class="pricing-mode pricing-mode-hidden">
+        
+        <p class="sub" style="max-width: 54rem; margin-bottom: 2rem;">
+          Dedicated 2D art for banners, key art, thumbnails or covers. Perfect when you want a fully
+          drawn look instead of pure 3D renders.
+        </p>
+
+        <div class="pricing-grid">
+          <article class="plan glass-strong">
+            <h3>2D Icons</h3>
+            <p class="desc">Hand-drawn 2D icons matching your game style.</p>
+            <div class="price">
+              <div class="amount">10k+ robux</div>
+              <div class="per">per order</div>
+            </div>
+            <div class="cta">
+              <a class="btn primary" href="index.html#contact">Get 2D Icons <span>→</span></a>
+              <a class="btn secondary neon-border" href="index.html#work">See work</a>
+            </div>
+            <ul class="features">
+              <li><span class="icon">✓</span><span>or $40+ USD</span></li>
+              <li><span class="icon">✓</span><span>1 revision pass</span></li>
+              <li><span class="icon">✓</span><span>Clean export ready for Roblox UI</span></li>
+              <li><span class="icon">✓</span><span>Delivery: 48–96h</span></li>
+            </ul>
+          </article>
+
+          <article class="plan glass-strong featured">
+            <h3 class="neon-text">2D Thumbnails</h3>
+            <p class="desc">Fully illustrated 2D thumbnails for games or videos.</p>
+            <div class="price">
+              <div class="amount">15k+ robux</div>
+              <div class="per">per order</div>
+            </div>
+            <div class="cta">
+              <a class="btn primary" href="index.html#contact">Get 2D Thumbnails <span>→</span></a>
+              <a class="btn secondary neon-border" href="index.html#work">See work</a>
+            </div>
+            <ul class="features">
+              <li><span class="icon">✓</span><span>or $60+ USD (depends on complexity)</span></li>
+              <li><span class="icon">✓</span><span>CTR-friendly compositions drawn in 2D</span></li>
+              <li><span class="icon">✓</span><span>1–2 revision passes</span></li>
+              <li><span class="icon">✓</span><span>Delivery: usually 48–96h</span></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      const mode3dBtn = document.getElementById('mode-3d');
+      const mode2dBtn = document.getElementById('mode-2d');
+      const section3d = document.getElementById('pricing-3d');
+      const section2d = document.getElementById('pricing-2d');
+
+      if (!mode3dBtn || !mode2dBtn || !section3d || !section2d) return;
+
+      function setMode(mode) {
+        const is3D = mode === '3d';
+        mode3dBtn.setAttribute('aria-pressed', String(is3D));
+        mode2dBtn.setAttribute('aria-pressed', String(!is3D));
+
+        section3d.classList.toggle('pricing-mode-hidden', !is3D);
+        section2d.classList.toggle('pricing-mode-hidden', is3D);
+      }
+
+      mode3dBtn.addEventListener('click', () => setMode('3d'));
+      mode2dBtn.addEventListener('click', () => setMode('2d'));
+    })();
+  </script>
+</body>
+</html>
